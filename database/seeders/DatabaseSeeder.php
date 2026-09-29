@@ -3,11 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Seed the application's database.
      */
@@ -20,6 +23,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin POS',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
+                'is_admin' => true,
             ]
         );
 
@@ -30,11 +34,13 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Kasir Rina',
                 'password' => Hash::make('password'),
                 'role' => 'kasir',
+                'is_admin' => false,
             ]
         );
 
         $this->call([
             PosSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }
